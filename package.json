@@ -1,0 +1,32 @@
+{
+  "name": "event-matching",
+  "version": "1.0.0",
+  "description": "Event matching app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanjmg/GA-Hackathon.git"
+  },
+  "keywords": [
+    "events",
+    "matching"
+  ],
+  "author": "Damie Evan Andrea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evanjmg/GA-Hackathon/issues"
+  },
+  "homepage": "https://github.com/evanjmg/GA-Hackathon#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "express-jwt": "^3.0.1",
+    "mongoose": "^4.1.5",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.0",
+    "path": "^0.11.14"
+  }
+}
