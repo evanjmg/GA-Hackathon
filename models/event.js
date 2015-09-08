@@ -6,7 +6,7 @@ var Event = new mongoose.Schema({
   host: String,
   location: String,
   url: String,
-  // price: Number,
+  price: String,
   img_url: String,
   lat: String,
   lon: String,
