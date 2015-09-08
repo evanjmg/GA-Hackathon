@@ -16,7 +16,7 @@ require('./config/passport')(passport);
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/event-match2');
+mongoose.connect('mongodb://localhost:27017/event-match');
 
 
 
@@ -56,6 +56,6 @@ var routes = require('./config/routes');
 
 app.use('/api', routes);
 
-app.listen(5000, function () {
-  console.log( "Express server listening on port " + 5000);
+app.listen(9000, function () {
+  console.log( "Express server listening on port " + 9000);
 });
