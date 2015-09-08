@@ -13,9 +13,8 @@ var Event = new mongoose.Schema({
   description: String,
   date: Date,
   invites: [{ 
-      accepted: { type: Boolean, default:false },
-      attendee: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-      paired_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+      _attendee: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+      _paired_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   }]
 })
 
