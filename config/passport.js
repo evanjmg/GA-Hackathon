@@ -8,18 +8,20 @@ module.exports = function(passport) {
     passwordField : 'password',
     passReqToCallback : true
   }, function(req, email, password, done) {
+    console.log('in passport');
     process.nextTick(function() {
       User.findOne({ 'email' : email }, function(err, user) {
-
+          console.log('creating user in passport');
         if (err) return done(err);
         if (user) return done(null, false);
 
         var newUser       = new User();
-        newUser.email  = email;
-        newUser.username  = req.body.username;
+        newUser.email     = email;
+        newUser.name      = req.body.name;
         newUser.password  = newUser.encrypt(password);
 
         newUser.save(function(err) {
+          console.log('saving user in passport');
           if (err) return done(err);
           return done(null, newUser);
         });

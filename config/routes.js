@@ -3,16 +3,17 @@
    var  bodyParser = require('body-parser'); //parses information from POST
    var methodOverride = require('method-override'); 
    var expressJWT = require("express-jwt");
-   var EventsController = require('../controllers/events');
+   var invitesController = require('../controllers/invites');
+   var eventsController = require('../controllers/events');
    var UsersController = require('../controllers/users');
    var AuthenticationController = require('../controllers/auth');
    var SearchController = require('../controllers/search');
 
 // AUTH
-   router.route('login/')
+   router.route('/login')
    .post(AuthenticationController.login);
    
-   router.route('join/')
+   router.route('/join')
    .post(AuthenticationController.signup);
    
 // USERS
@@ -22,7 +23,7 @@
 
 // SEARCH EVENTS
 router.route('/events/search')
-  .get(SearchController.postEventbriteSearch)
+  .post(SearchController.postEventbriteSearch)
 // EVENTS
  router.route('/events/')
    .post(eventsController.eventsCreate)
@@ -39,7 +40,7 @@ router.route('/events/search')
  // INVITES controller
  router.route('/invites/')
    .get(invitesController.invitesIndex)
-   .post(nvitesController.invitesCreate)
+   .post(invitesController.invitesCreate)
    .delete(invitesController.invitesDelete);
 
  router.route('/invites/pending')
