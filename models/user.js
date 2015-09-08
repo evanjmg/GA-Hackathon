@@ -18,6 +18,7 @@ userSchema.set('toJSON', {
       id: ret._id,
       email: ret.email,
       name: ret.name,
+      img: ret.img
     }
     return returnJson;
   }

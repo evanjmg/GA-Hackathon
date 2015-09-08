@@ -39,11 +39,11 @@ router.route('/events/search')
 
  // INVITES controller
  router.route('/invites/')
-
+  .post(invitesController.invitesCreate)
    .delete(invitesController.invitesDelete);
    router.route('/invites/:id')
    .get(invitesController.invitesIndex)
-   .post(invitesController.invitesCreate);
+  
  router.route('/invites/pending')
    .get(invitesController.invitesPending);
 

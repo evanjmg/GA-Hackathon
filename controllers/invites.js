@@ -42,7 +42,7 @@ function invitesPending(req, res) {
 }
 
 function invitesCreate (req, res) {
-  Event.findById(req.params.id, function (err, event) {
+  Event.findById(req.body.eventId, function (err, event) {
     if (err) res.json({ message: "Could not invite user. An error occurred"})
     // go through the event to see if the user was already invited.
     if (event) {
