@@ -8,7 +8,12 @@ function eventsCreate (req, res){
       res.json({ event: event})
     })
 }
-
+function eventsFindByName (req, res) {
+  Event.find({ name: req.body.name }, function (err, oneEvent) {
+    if (err) res.json(err);
+    res.json(oneEvent);
+  })
+}
 // ALL OF OWNERS EVENTS
 function eventsIndex (req, res) {
   Event.find().populate('invites._attendee').populate('invites._paireduser').exec(function (err,events) {
@@ -55,6 +60,7 @@ function eventsCurrent (req, res) {
 }
 
 module.exports = {
+  eventsFindByName: eventsFindByName,
  eventsCreate: eventsCreate,
  eventsDelete: eventsDelete,
  eventsShow:eventsShow,

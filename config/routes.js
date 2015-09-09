@@ -28,7 +28,8 @@ router.route('/events/search')
  router.route('/events/')
    .post(eventsController.eventsCreate)
    .get(eventsController.eventsIndex);
-
+  router.route('/events/search/name')
+    .post(eventsController.eventsFindByName)
  router.route('/events/current')
      .get(eventsController.eventsCurrent); 
 
