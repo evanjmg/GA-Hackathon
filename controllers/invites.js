@@ -130,27 +130,29 @@ function invitesPairUp(req,res) {
         var i=0,j=0,k=0;
             pairedUsers= false; 
 
-     
+      if(mainEvent) {
         for (i;i < mainEvent.invites.length; i++) {
-         
           if(mainEvent.invites[i]._attendee !== (null || undefined) && mainEvent.invites[i]._attendee !== user._id) {
+
             if(mainEvent.invites[i]._paireduser == null) {
                 var otherUserId = mainEvent.invites[i]._attendee
                 pairedUsers = true;
+                console.log(otherUserId);
               break;
             } 
           } 
         }
         if (pairedUsers) {
             for (j;j < mainEvent.invites.length; j++) {
-              if(mainEvent.invites[j]._attendee == user.id) {
+              if(mainEvent.invites[j]._attendee == user._id) {
+                console.log(user._id);
                  mainEvent.invites[j]._paireduser = otherUserId;
                   break;
               }
             }
             for (k;k < mainEvent.invites.length; k++) {
               if(mainEvent.invites[k]._attendee == otherUserId) {
-                 mainEvent.invites[k]._paireduser = user.id;
+                 mainEvent.invites[k]._paireduser = user._id;
                   break;
               }
             }
@@ -162,7 +164,9 @@ function invitesPairUp(req,res) {
           res.json({ message: "no available paired users or may be already paired", success: false })
         }
      
-      })
+      } else {
+        res.json({ message: "no event"})
+      } })
 
   })
 }
