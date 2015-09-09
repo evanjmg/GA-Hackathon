@@ -35,10 +35,12 @@ router.route('/events/search')
 
  router.route('/events/:id')
    .put(eventsController.eventsUpdate) 
-   .delete(eventsController.eventsDelete) 
+ 
    .get(eventsController.eventsShow);
 
  // INVITES controller
+ router.route('/invites/delete') 
+  .post(eventsController.eventsDelete); 
  router.route('/invites/')
   .post(invitesController.invitesCreate)
    .delete(invitesController.invitesDelete);

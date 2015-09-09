@@ -25,7 +25,7 @@ function invitesIndex(req, res) {
 }
 function myEventIndex(req, res) {
   Event.find( { "invites": { "$elemMatch": { "_attendee": req.body.userId  } } }).populate("invites._attendee").populate("invites._paireduser").exec(function (err, events) {
-    if (err) res.json(err);
+    if (err) res.json({ error: err });
       // var i=0,j=0,pairedEvents = [];
       // for(i; i < events.length; i++) {
       //   for(j; j < events[i].invites.length; j++) {
@@ -106,17 +106,19 @@ function invitesAccept (req, res) {
 }
 
 function invitesDelete (req,res) {
-  Event.findById(req.body.eventId, function (err, event) { 
+  Event.findById(req.body.eventId, function (err, oneEvent) { 
     if (err) res.json({ message: "An error occurred"});
+    var i=0;
+    for (i; i < oneEvent.invites.length; i++) {
+      if (oneEvent.invites[i]._attendee == req.body.userId) {
+        oneEvent.invites[i].remove();
+        break;
+    }
+  }
 
-    event.invites.forEach(function(invite) {
-      if (invite._invitee == req.user.id) 
-        invite.remove();
-    });
-
-    event.save( function (err) {
+    oneEvent.save( function (err) {
       if (err) res.json({ message: "An error occurred"});
-      res.status(200).send({ message: "Deleted" });
+      res.status(200).send({ message: "Cancelled event" });
     });
   });
 }
