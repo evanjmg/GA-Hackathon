@@ -10,8 +10,8 @@ function eventsCreate (req, res){
 }
 function eventsFindByName (req, res) {
   Event.find({ name: req.body.name }, function (err, oneEvent) {
-    if (err) res.json(err);
-    res.json(oneEvent);
+    if (err) res.json({ error: err });
+    res.json(oneEvent[0]);
   })
 }
 // ALL OF OWNERS EVENTS
