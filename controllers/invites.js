@@ -23,6 +23,27 @@ function invitesIndex(req, res) {
   //       res.status(404).send({ message: "Could not find any invitations", Invitations: Invitations })}
   //     ); 
 }
+function myEventIndex(req, res) {
+  Event.find( { "invites": { "$elemMatch": { "_attendee": req.body.userId  } } }).populate("invites._attendee").populate("invites._paireduser").exec(function (err, events) {
+    if (err) res.json(err);
+      // var i=0,j=0,pairedEvents = [];
+      // for(i; i < events.length; i++) {
+      //   for(j; j < events[i].invites.length; j++) {
+      //     if(events[i].invites[j]._paireduser !=  undefined 
+      //       && events[i].invites[j]._attendee == req.body.userId) {
+      //         pairedEvents.push(events[i]);
+      //       break
+      //     }
+      //   }
+      // }
+      // if(pairedEvents != []) {
+      res.json(events) 
+    // } else {
+    //   res.json({ message: "you have no paired events"});
+    // }
+  })
+}
+
 
 function invitesPending(req, res) {
   Event.find( 
@@ -99,8 +120,53 @@ function invitesDelete (req,res) {
     });
   });
 }
+function invitesPairUp(req,res) {
+  User.findById(req.body.userId, function (err, user) {
+    if(err) res.json({ message: "An Error occured with userId - either wrong or the server is not working"})
+      Event.findById(req.body.eventId, function (err, mainEvent) {
 
+        var i=0,j=0,k=0;
+            pairedUsers= false; 
+
+     
+        for (i;i < mainEvent.invites.length; i++) {
+         
+          if(mainEvent.invites[i]._attendee !== (null || undefined) && mainEvent.invites[i]._attendee !== user._id) {
+            if(mainEvent.invites[i]._paireduser == null) {
+                var otherUserId = mainEvent.invites[i]._attendee
+                pairedUsers = true;
+              break;
+            } 
+          } 
+        }
+        if (pairedUsers) {
+            for (j;j < mainEvent.invites.length; j++) {
+              if(mainEvent.invites[j]._attendee == user.id) {
+                 mainEvent.invites[j]._paireduser = otherUserId;
+                  break;
+              }
+            }
+            for (k;k < mainEvent.invites.length; k++) {
+              if(mainEvent.invites[k]._attendee == otherUserId) {
+                 mainEvent.invites[k]._paireduser = user.id;
+                  break;
+              }
+            }
+            mainEvent.save(function(err) {
+              if (err) res.send(err)
+            res.json(mainEvent); 
+            });
+        } else {
+          res.json({ message: "no available paired users or may be already paired", success: false })
+        }
+     
+      })
+
+  })
+}
 module.exports = {
+  myEventIndex: myEventIndex,
+  invitesPairUp: invitesPairUp,
   invitesPending: invitesPending,
   invitesIndex: invitesIndex,
   invitesAccept: invitesAccept,

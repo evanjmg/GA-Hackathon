@@ -43,7 +43,11 @@ router.route('/events/search')
    .delete(invitesController.invitesDelete);
    router.route('/invites/:id')
    .get(invitesController.invitesIndex)
-  
+// pairup
+router.route('/pairup')
+  .post(invitesController.invitesPairUp);
+router.route('/events/attending')
+  .post(invitesController.myEventIndex);
  router.route('/invites/pending')
    .get(invitesController.invitesPending);
 

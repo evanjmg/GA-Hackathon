@@ -11,7 +11,7 @@ function eventsCreate (req, res){
 
 // ALL OF OWNERS EVENTS
 function eventsIndex (req, res) {
-  Event.find().populate('invites._attendees').exec(function (err,events) {
+  Event.find().populate('invites._attendee').populate('invites._paireduser').exec(function (err,events) {
     if(err) res.json({ message: "There was a problem with your request"});
     res.json(events);
   })
@@ -39,7 +39,7 @@ function eventsDelete (req,res) {
   })
 }
 function eventsShow (req, res) {
-  Event.findById(req.params.id).populate('invites._invitee').populate('_owner').exec( function (err, event){
+  Event.findById(req.params.id).populate('invites._attendee').populate('invites._paireduser').exec( function (err, event){
     if (err) res.json({ message: "An error occurred"})
       if (event) { return res.json(event); } 
     else { res.json({ message: 'Event not found'})}

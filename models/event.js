@@ -14,7 +14,7 @@ var Event = new mongoose.Schema({
   date: Date,
   invites: [{ 
       _attendee: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-      _paired_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+      _paireduser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   }]
 })
 
