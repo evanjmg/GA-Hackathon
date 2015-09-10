@@ -18,8 +18,8 @@ require('./config/passport')(passport);
 
 
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost:27017/event-match');
+var databaseURL = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/event-match'
+mongoose.connect(databaseURL);
 app.use(express.static(__dirname + '/public'));
 
 
@@ -65,6 +65,6 @@ app.use('/api', routes);
 app.get('/partials/:filename', angularRoutes.partials);
 app.use(angularRoutes.index);
 
-app.listen(9000, function () {
+app.listen(process.env.PORT || 9000, function () {
   console.log( "Express server listening on port " + 9000);
 });
