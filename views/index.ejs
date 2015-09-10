@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eventMatchApp">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eventMatch.com</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+  <!-- External css files -->
+  <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.min.css">
+  <link href="/libs/ladda/dist/ladda-themeless.min.css" rel="stylesheet" >
+
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<div class="container main-content" ng-controller="usersController as users">
+
+
+
+<div ng-controller="eventsController as events">
+<div ng-include="'partials/nav'"></div>
+<div ui-view class="mainView"> 
+  
+</div>
+</div>
+</div>
+  
+  <!-- External JS Files -->
+
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+  <!-- Internal JS Files -->
+  <script src="/libs/angular/angular.min.js" ></script>
+  <script src="/libs/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+  <script src="/libs/ladda/dist/spin.min.js"></script>
+  <script src="/libs/ladda/dist/ladda.min.js"></script>
+  <script src="/libs/angular-ladda/dist/angular-ladda.min.js" ></script>
+
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/services/currentUser.js"></script>
+  <!--<script type="text/javascript" src="js/services/geocodeService.js"></script>-->
+  <script type="text/javascript" src="/js/services/geoService.js"></script>
+  <script type="text/javascript" src="js/services/tokenService.js"></script>
+  <script type="text/javascript" src="js/models/user.js"></script>
+  <script type="text/javascript" src="js/models/event.js"></script>
+  <script type="text/javascript" src="js/controllers/usersController.js"></script>
+  <script type="text/javascript" src="js/controllers/eventsController.js"></script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,47 @@
+<h1>My Events</h1>
+<hr>
+<div class="row">
+  <div class="row searchResultsRepeat" ng-repeat="event in events.myEvents" >
+  <div class="myEventsItem">
+    <div class='col-sm-3'><img class="img-responsive" ng-src="{{event.img_url}}" alt="event"></div>
+    <div class='col-sm-5'>
+    <h3>{{event.name}}</h3>
+    <p>
+      {{ event.description | limitTo: 200 }}...
+      <a ui-sref="events.eventShow(event)">More Info</a>
+    </p>
+    </div>
+    <div class='col-sm-4'><p style="font-weight:bold" class="date-conversion">{{ event.date | date:'EEEE, d MMMM   HH:mm' : '+0000'}}</p>
+    <p><a href="{{ event.url}}}" target="_blank" style="font-weight:bold">Get Tickets</a></p>
+    <p>
+    <button class="btn btn-danger cancelButton" ng-click="events.cancel(event, $event)">Cancel</button>
+    </p>
+    <p>
+      <h5>Pairings</h5>
+      <div ng-repeat="invite in event.invites | limitTo: 1">
+      <div class="row">
+      <div class="col-sm-6">
+      <p>
+        <span ng-show="invite._attendee.name" class="partnername">{{ invite._attendee.name }}</span>
+        </p>
+        <img ng-src="{{invite._attendee.img}}" class="attendee-img"  alt="">
+        </div> 
+        <div class="col-sm-6">
+        <p>
+          <span class="partnername" ng-show="invite._paireduser.name">{{ invite._paireduser.name }}</span>
+          <span   class="partnername" ng-show="!invite._paireduser.name">No partner</span>
+          </p>
+          <p>
+            <img ng-show="invite._paireduser.name" ng-src="{{invite._paireduser.img}}" width="50px" alt="" class="attendee-img">
+            <img ng-src="/images/no-profile-image.gif" ng-show="!invite._paireduser.img" class="attendee-img"  alt="">
+          </p>
+
+        </div>
+       
+     </div>
+      </div>
+    </p>
+    </div>
+    </div>
+  </div>
+</div>

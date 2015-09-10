@@ -26,21 +26,9 @@ function invitesIndex(req, res) {
 function myEventIndex(req, res) {
   Event.find( { "invites": { "$elemMatch": { "_attendee": req.body.userId  } } }).populate("invites._attendee").populate("invites._paireduser").exec(function (err, events) {
     if (err) res.json({ error: err });
-      // var i=0,j=0,pairedEvents = [];
-      // for(i; i < events.length; i++) {
-      //   for(j; j < events[i].invites.length; j++) {
-      //     if(events[i].invites[j]._paireduser !=  undefined 
-      //       && events[i].invites[j]._attendee == req.body.userId) {
-      //         pairedEvents.push(events[i]);
-      //       break
-      //     }
-      //   }
-      // }
-      // if(pairedEvents != []) {
+      
       res.json(events) 
-    // } else {
-    //   res.json({ message: "you have no paired events"});
-    // }
+
   })
 }
 
@@ -142,6 +130,7 @@ function invitesPairUp(req,res) {
             } 
           } 
         }
+
         if (pairedUsers) {
             for (j;j < mainEvent.invites.length; j++) {
               if(mainEvent.invites[j]._attendee == user._id) {
@@ -156,6 +145,7 @@ function invitesPairUp(req,res) {
                   break;
               }
             }
+
             mainEvent.save(function(err) {
               if (err) res.send(err)
             res.json(mainEvent); 

@@ -1,0 +1,41 @@
+<h1 class="search-header">Search for Events</h1>
+<form ng-submit="events.search()">
+  <div class="form-group">
+  <input type="text" class="form-control" placeholder="Search Events" ng-model="events.query.query">
+
+  </div>
+  <div class="form-group">
+    <button class="btn btn-info" type="submit">Search</button>
+    <button class="btn btn-success myEventsButton" ng-click="events.getMyEvents()">My Events</button>
+    <!-- <input type="checkbox" name="my-checkbox" checked> -->
+  </div>
+
+</form>
+<div class="loading">
+<div class="spinner">
+<p class="loading-text">
+  Searching...
+</p>
+  <div class="double-bounce1"></div>
+  <div class="double-bounce2"></div>
+</div>
+</div>
+<div class="row searchResultsContainer">
+  <div class="row searchResultsRepeat" ng-repeat="event in events.all" >
+    <div class='col-sm-3'><img class="img-responsive" ng-src="{{event.img_url}}" alt="event"></div>
+    <div class='col-sm-5'>
+    <h3>{{event.name}}</h3>
+    <p>
+      {{ event.description | limitTo: 200 }}...
+      <a ui-sref="events.eventShow(event)">More Info</a>
+    </p>
+    </div>
+    <div class='col-sm-4'><p class="date-conversion">{{ event.date | date:'EEEE, d MMMM   HH:mm' : '+0000'}}</p>
+    <p><a href="{{ event.url}}}" target="_blank">Get Tickets</a></p>
+    <p>
+    <button class="btn btn-info pairUpButton" ng-click="events.pairUp(event, $event)">Pair Up</button>
+    <button class='btn btn-success whoIsButton' ng-click='events.getMyEvents()' style="margin:20px;">See Who It Is</button>
+    </p>
+    </div>
+  </div>
+</div>

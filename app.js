@@ -7,9 +7,12 @@ var passport   = require("passport");
 var path = require('path');
 var app = express();
 var morgan = require('morgan')
+var angularRoutes = require('./config/angularRoutes');
+var ejsLocals = require('ejs-locals');
 
 
-
+app.set('views', __dirname + '/views')
+app.set('view engine', 'ejs');
 // Setup Passport
 require('./config/passport')(passport);
 
@@ -17,7 +20,7 @@ require('./config/passport')(passport);
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/event-match');
-
+app.use(express.static(__dirname + '/public'));
 
 
 
@@ -34,6 +37,7 @@ app.use(function (error, request, response, next) {
   }
 });
 // Setup Middleware
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -51,11 +55,15 @@ app.use(function(req, res, next) {
 });
 
 
+
 app.use(passport.initialize());
 
 var routes = require('./config/routes');
 
 app.use('/api', routes);
+
+app.get('/partials/:filename', angularRoutes.partials);
+app.use(angularRoutes.index);
 
 app.listen(9000, function () {
   console.log( "Express server listening on port " + 9000);
