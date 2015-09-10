@@ -5,15 +5,15 @@ angular
  Event.$inject = ['$resource'];
  function Event ($resource) {
 
-  var url = 'eventmatch.herokuapp.com/api/events/'
+  var url = 'https://eventmatch.herokuapp.com/api/events/'
   var EventResource = $resource(url + ':id', {id: '@_id'}, {
     'update': { method: 'PUT' },
     'search': { method: 'POST', url: url + 'search', isArray:true },
-    'invite': { method: 'POST', url: 'eventmatch.herokuapp.com/api/invites/' },
-    'pairup': { method: 'POST', url: 'eventmatch.herokuapp.com/api/pairup'},
+    'invite': { method: 'POST', url: 'https://eventmatch.herokuapp.com/api/invites/' },
+    'pairup': { method: 'POST', url: 'https://eventmatch.herokuapp.com/api/pairup'},
     'myEvents': { method: 'POST', url: url + 'attending', isArray:true},
     'findByName': { method: 'POST', url: url + 'search/name'},
-    'inviteDelete': { method: 'POST', url: 'eventmatch.herokuapp.com/api/invites/delete' }
+    'inviteDelete': { method: 'POST', url: 'https://eventmatch.herokuapp.com/api/invites/delete' }
   });
 
   
