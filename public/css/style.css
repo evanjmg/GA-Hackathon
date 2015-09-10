@@ -131,6 +131,8 @@ nav,{
 } 
 .searchResultsRepeat {
   padding:20px;
+  margin-left:20px;
+  margin-right:20px;
   margin-bottom: -10px;
 }
 input{
@@ -151,9 +153,7 @@ display:none;}
   width:50%;
   margin-left: 9%;
 }
-.searchResultsContainer {
-  padding:20px;
-}
+
 }
 .spinner {
   width: 40px;
